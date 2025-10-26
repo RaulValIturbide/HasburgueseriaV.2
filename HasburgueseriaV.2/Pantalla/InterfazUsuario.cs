@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HasburgueseriaV._2.Pantalla
+{
+    public class InterfazUsuario
+    {
+        public static int MenuPrincipal()
+        {
+            int usuario = -1;
+            bool correcto = false;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Bienvenido a la Hasburguesería,dígame,¿que desea?\n1-Hacer Pedido\n2-Leer Tickets\n3-Ver menús\n4-Salir");
+                    Console.Write(">>");
+                    usuario = Convert.ToInt32(Console.ReadLine());
+
+                    if (EleccionUsuario(1, 4, usuario))
+                    {
+                        correcto = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Elija un número entre los posibles e intentelo de nuevo\n");
+                    }
+
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("Elija un número\n");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR FATAL: {ex.StackTrace}");
+                }
+            } while (!correcto);
+
+            return usuario;
+        }
+
+        /// <summary>
+        /// Metodo que pregunta al usuario cual es su numero de ticket
+        /// </summary>
+        /// <returns>devuelve un numero</returns>
+        public static int MostrarTicket()
+        {
+            int IDBuscado = 0;
+
+            try
+            {
+                Console.WriteLine("¿Dame el número del ticket que quieres ver");
+                Console.Write(">>");
+                IDBuscado = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException fe)
+            {
+
+            }
+            catch (Exception ex)
+            { 
+            }
+            return IDBuscado;
+        }
+        public static void PresioneEnterParaContinuar()
+        {
+            Console.WriteLine("\n>> Presione enter para continuar");
+            Console.ReadLine();           
+        }
+
+        public static int EleccionMenu()
+        {
+            int menuElegido = -1;
+            bool correcto = false;
+            try
+            {
+                do
+                {
+                    Console.WriteLine("¿Que menú quieres?\n1-Menu Felipe V\n2-Menu Juana la loca\n3-Menu Familiar");
+                    Console.Write(">>");
+                    menuElegido = Convert.ToInt32(Console.ReadLine());
+                    if (EleccionUsuario(1, 3, menuElegido))
+                    {
+                        correcto = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Elige un numero entre los valores posibles");
+                    }
+                } while (!correcto);
+            }
+            catch (FormatException fe)
+            {
+                Console.WriteLine("Elige un número");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR FATAL\n: {ex.StackTrace}");
+            }
+            return menuElegido;
+        }
+
+        /// <summary>
+        /// Metodo que pregunta al usuario si desea pedir otro menú al ticket
+        /// </summary>
+        /// <returns>Devolverá true si el usuario decide terminar el pedido y no añadir otro menu al ticket</returns>
+        public static bool TerminarPedido()
+        {
+            bool correcto = false;
+            int usuario = -1;
+            try
+            {
+                Console.WriteLine("¿Deseas Pedir otro Menú?\n1-Si\n2-No");
+                usuario = Convert.ToInt32(Console.ReadLine());
+                if (EleccionUsuario(1, 2, usuario))
+                {
+                    correcto = true;
+                }
+                else
+                {
+                    Console.WriteLine("Elija un numero de los posibles");
+                }
+                
+            }
+            catch (FormatException fe)
+            {
+                Console.WriteLine("Escriba un numero");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR FATAL: {ex.StackTrace}");
+            }
+            return usuario == 2 ? true : false;
+        }
+
+        #region Metodos Privados
+        /// <summary>
+        /// Este metodo comprueba que nuestro usuario elija entre los parámetros que nosotros le pasamos, igual o mayor que el mas pequeño
+        /// e igual o menor que el mas grande
+        /// </summary>
+        /// <param name="menor"></param>
+        /// <param name="mayor"></param>
+        /// <param name="usuario"></param>
+        /// <returns>True si la eleccion se encuentra entre los numeros correspondientes</returns>
+        private static bool EleccionUsuario(int menor, int mayor, int usuario)
+        {
+            return usuario >= menor && usuario <= mayor ? true : false;
+        }
+        #endregion
+    }
+}
