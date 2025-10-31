@@ -18,6 +18,7 @@ public class Program
             bucle++;
             switch (InterfazUsuario.MenuPrincipal())
             {
+                //Prueba
                 case 1://Hacer Pedido
                     Ticket t = new Ticket(); 
                     t.ID = GestorTicket.AgregarNuevoTicketID();
