@@ -17,7 +17,8 @@ namespace HasburgueseriaV._2.Tickets
 
         public override string ToString()
         {
-            return $"------------Mostrando ticket-----------\nCódigo Ticket:{this.ID:D3}\nPrecio:{this.Precio:F2} {MostrarListaMenu()}";
+            return $"------------Mostrando ticket-----------\nCódigo Ticket:{this.ID:D3}\nPrecio:{this.Precio:F2} {MostrarListaMenu()}\n" +
+                   $"------------Mostrando ticket-----------";
         }
 
         private string MostrarListaMenu()
@@ -28,6 +29,11 @@ namespace HasburgueseriaV._2.Tickets
             {
                 numMenu++;
                 lista += $"\nMenú {numMenu}:" + m.ToString();
+                if (numMenu != listaMenu.Count) //Si no es el último que separe por 2 barras
+                {
+                    lista += "\n----------------------------------------" +
+                             "\n----------------------------------------";
+                }
             }
             return lista;
         }

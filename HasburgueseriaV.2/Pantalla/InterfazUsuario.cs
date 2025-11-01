@@ -1,8 +1,10 @@
-﻿using System;
+﻿using HasburgueseriaV._2.Tickets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HasburgueseriaV._2.Excepciones;
 
 namespace HasburgueseriaV._2.Pantalla
 {
@@ -66,12 +68,17 @@ namespace HasburgueseriaV._2.Pantalla
             }
             return IDBuscado;
         }
+        public static void LimpiarPantalla()
+        {
+            Console.Clear();
+        }
         public static void PresioneEnterParaContinuar()
         {
             Console.WriteLine("\n>> Presione enter para continuar");
             Console.ReadLine();           
         }
 
+        
         public static int EleccionMenu()
         {
             int menuElegido = -1;
@@ -105,6 +112,42 @@ namespace HasburgueseriaV._2.Pantalla
         }
 
         /// <summary>
+        /// Metodo para enseñarle al usuario su pedido y preguntarle si desea pagarlo o no
+        /// </summary>
+        /// <param name="ticketActual"></param>
+        /// <returns>Si se elije que si (1) devolverá true y se pagará el pedido</returns>
+        public static bool PagarPedido(Ticket ticketActual)
+        {
+            bool correcto = false;
+            int usuario = 2;
+            do
+            {
+                try
+                {
+                    Console.WriteLine($"Tu pedido se compone de :\n" +
+                                      $"{ticketActual.ToString()}\n\n" +
+                                      $"¿Deseas pagarlo? Precio:{ticketActual.Precio:F2}\n" +
+                                      $"1-Si\n2-No");
+                    usuario = Convert.ToInt32(Console.ReadLine());
+                    if (EleccionUsuario(1, 2, usuario)) { correcto = true; } else { throw new FueraRangoException("Elija un numero entre 1 y 2"); } //Comprobamos que el usuario elija entre los posibles y salimos del bucle
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("Elije un número");
+                }
+                catch (FueraRangoException fre)
+                {
+                    Console.WriteLine(fre.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ERROR FATAL:\n" + ex.StackTrace);
+                }
+            } while (!correcto);
+            return usuario == 1 ? true : false;
+        }
+
+        /// <summary>
         /// Metodo que pregunta al usuario si desea pedir otro menú al ticket
         /// </summary>
         /// <returns>Devolverá true si el usuario decide terminar el pedido y no añadir otro menu al ticket</returns>
@@ -112,28 +155,36 @@ namespace HasburgueseriaV._2.Pantalla
         {
             bool correcto = false;
             int usuario = -1;
-            try
+            do
             {
-                Console.WriteLine("¿Deseas Pedir otro Menú?\n1-Si\n2-No");
-                usuario = Convert.ToInt32(Console.ReadLine());
-                if (EleccionUsuario(1, 2, usuario))
+                try
                 {
-                    correcto = true;
+                    Console.WriteLine("¿Deseas Pedir otro Menú?\n1-Si\n2-No");
+                    usuario = Convert.ToInt32(Console.ReadLine());
+                    if (EleccionUsuario(1, 2, usuario))
+                    {
+                        correcto = true;
+                    }
+                    else
+                    {
+                        throw new FueraRangoException("Elija un numero entre 1 y 2");
+                    }
+
                 }
-                else
+                catch (FormatException fe)
                 {
-                    Console.WriteLine("Elija un numero de los posibles");
+                    Console.WriteLine("Escriba un numero");
                 }
-                
-            }
-            catch (FormatException fe)
-            {
-                Console.WriteLine("Escriba un numero");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"ERROR FATAL: {ex.StackTrace}");
-            }
+                catch (FueraRangoException fre)
+                {
+                    Console.WriteLine(fre.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR FATAL: {ex.StackTrace}");
+                }
+            } while (!correcto);
+
             return usuario == 2 ? true : false;
         }
 

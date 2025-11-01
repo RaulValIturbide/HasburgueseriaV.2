@@ -14,25 +14,30 @@ public class Program
         int bucle = 0;
         do
         {
-            if (bucle > 0) { InterfazUsuario.PresioneEnterParaContinuar(); }
+            if (bucle > 0) { InterfazUsuario.PresioneEnterParaContinuar(); InterfazUsuario.LimpiarPantalla(); }
             bucle++;
             switch (InterfazUsuario.MenuPrincipal())
             {
                 //Prueba
                 case 1://Hacer Pedido
+                    
                     Ticket t = new Ticket(); 
                     t.ID = GestorTicket.AgregarNuevoTicketID();
                     do
                     {
+                        InterfazUsuario.LimpiarPantalla();
                         GestorMenu.CrearMenu(t,false);
 
                     } while (!InterfazUsuario.TerminarPedido()); //Se repetirá hasta que el usuario haya terminado de pedir menús
 
                     t.Precio = GestorTicket.SumaPrecioTicket(t);
 
-                    if (t.Precio == -1)
+                    InterfazUsuario.LimpiarPantalla();
+
+                    if (t.Precio == -1 || !InterfazUsuario.PagarPedido(t))
                     {
-                        //No guardamos ticket
+                        Console.WriteLine("Cancelando Ticket...");
+                        
                     }
                     else
                     {
@@ -45,6 +50,7 @@ public class Program
                 case 3://Ver Menus
                     Menu mostrarMenu = new Menu();
                     mostrarMenu  = GestorMenu.CrearMenu(null,true);
+                    InterfazUsuario.LimpiarPantalla();
                     Console.WriteLine(mostrarMenu.ToString());              
                     break;
                 case 4:
@@ -82,7 +88,7 @@ public class Program
             {
                 
                 con.codigoError = 0;
-                con.mensajeError = "------------Mostrando ticket-----------";
+                con.mensajeError = "\n\nGracias por su compra,¡¡Esperamos que vuelva pronto!!";
 
                 Console.WriteLine(ticketBuscado.ToString());
             }
