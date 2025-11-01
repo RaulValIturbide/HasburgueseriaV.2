@@ -47,13 +47,21 @@ public class Program
                     Console.WriteLine(TicketMostrado().mensajeError); //Ejecutamos la busqueda del ticket y mostramos el resultado
                     break;
                 case 3://Ver Menus
-                    Menu mostrarMenu = new Menu();
-                    mostrarMenu  = GestorMenu.CrearMenu(null);
-                    InterfazUsuario.LimpiarPantalla();
-                    if(mostrarMenu != null)
+                    switch(InterfazUsuario.ElegirLista())
                     {
-                        Console.WriteLine(mostrarMenu.ToString());
-                    }
+                        case 1: //Mostrar ingredientes
+                            Menu mostrarMenu = new Menu();
+                            mostrarMenu = GestorMenu.CrearMenu(null);
+                            InterfazUsuario.LimpiarPantalla();
+                            if (mostrarMenu != null)
+                            {
+                                Console.WriteLine(mostrarMenu.ToString());
+                            }
+                            break;
+                        case 2://Mostrar precios
+
+                            break;
+                    }                  
                     break;
                 case 4:
                     finPrograma = true;

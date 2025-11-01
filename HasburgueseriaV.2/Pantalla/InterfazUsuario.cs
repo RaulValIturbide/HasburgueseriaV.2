@@ -143,6 +143,7 @@ namespace HasburgueseriaV._2.Pantalla
                                       $"{ticketActual.ToString()}\n\n" +
                                       $"¿Deseas pagarlo? Precio:{ticketActual.Precio:F2}\n" +
                                       $"1-Si\n2-No");
+                    Console.Write(">>");
                     usuario = Convert.ToInt32(Console.ReadLine());
                     if (EleccionUsuario(1, 2, usuario)) { correcto = true; } else { throw new FueraRangoException("Elija un numero entre 1 y 2"); } //Comprobamos que el usuario elija entre los posibles y salimos del bucle
                 }
@@ -175,6 +176,7 @@ namespace HasburgueseriaV._2.Pantalla
                 try
                 {
                     Console.WriteLine("¿Deseas Pedir otro Menú?\n1-Si\n2-No");
+                    Console.Write(">>");
                     usuario = Convert.ToInt32(Console.ReadLine());
                     if (EleccionUsuario(1, 2, usuario))
                     {
@@ -201,6 +203,37 @@ namespace HasburgueseriaV._2.Pantalla
             } while (!correcto);
 
             return usuario == 2 ? true : false;
+        }
+
+        public static int ElegirLista()
+        {
+            int usuario = -1;
+            bool correcto = false;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("\n¿Que información deseas?\n1-Ver ingredientes de los menú\n2-Ver precios de los menú");
+                    Console.Write(">>");
+                    usuario = Convert.ToInt32(Console.ReadLine());
+                    if (EleccionUsuario(1, 2, usuario)){ correcto = true; } else { throw new FueraRangoException("Elija un numero entre 1 y 2"); }
+                }
+                catch (FueraRangoException fre)
+                {
+                    Console.WriteLine(fre.Message);
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("Elija un número");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR FATAL:\n{ex.StackTrace}");
+                }
+
+                return usuario;
+            
+            } while (!correcto);
         }
 
         #region Metodos Privados
