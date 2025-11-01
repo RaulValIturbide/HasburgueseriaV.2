@@ -10,7 +10,7 @@ namespace HasburgueseriaV._2.Gestor
     public class GestorHamburguesa
     {
         public static List<Ingrediente> listaIngredientes = new List<Ingrediente>();
-        public static List<Ingrediente> CrearIngredientesHamburguesa(int IdHamburguesa,bool mostrar)
+        public static List<Ingrediente> CrearIngredientesHamburguesa(int IdHamburguesa)
         {
             
             
@@ -57,7 +57,7 @@ namespace HasburgueseriaV._2.Gestor
 
         public static void MostrarIngredientesHamburguesa(int IDHamburguesa)
         {
-            CrearIngredientesHamburguesa(IDHamburguesa,true);//Creamos los ingredientes en la lista
+            CrearIngredientesHamburguesa(IDHamburguesa);//Creamos los ingredientes en la lista
             foreach (Ingrediente i in listaIngredientes)
             {
                 i.ToString();

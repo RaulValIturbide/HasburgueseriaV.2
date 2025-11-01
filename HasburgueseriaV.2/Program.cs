@@ -18,15 +18,14 @@ public class Program
             bucle++;
             switch (InterfazUsuario.MenuPrincipal())
             {
-                //Prueba
-                case 1://Hacer Pedido
-                    
+                case 1://Hacer Pedido                   
                     Ticket t = new Ticket(); 
                     t.ID = GestorTicket.AgregarNuevoTicketID();
                     do
                     {
                         InterfazUsuario.LimpiarPantalla();
-                        GestorMenu.CrearMenu(t,false);
+                        Menu menuElegido =  GestorMenu.CrearMenu(t);
+                        Console.WriteLine($"\nAñadiendo {menuElegido.nombre} al ticket...\n" ); //Mostramos el menú elegido
 
                     } while (!InterfazUsuario.TerminarPedido()); //Se repetirá hasta que el usuario haya terminado de pedir menús
 
@@ -49,9 +48,12 @@ public class Program
                     break;
                 case 3://Ver Menus
                     Menu mostrarMenu = new Menu();
-                    mostrarMenu  = GestorMenu.CrearMenu(null,true);
+                    mostrarMenu  = GestorMenu.CrearMenu(null);
                     InterfazUsuario.LimpiarPantalla();
-                    Console.WriteLine(mostrarMenu.ToString());              
+                    if(mostrarMenu != null)
+                    {
+                        Console.WriteLine(mostrarMenu.ToString());
+                    }
                     break;
                 case 4:
                     finPrograma = true;

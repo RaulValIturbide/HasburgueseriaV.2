@@ -17,7 +17,7 @@ namespace HasburgueseriaV._2.Tickets
 
         public override string ToString()
         {
-            return $"------------Mostrando ticket-----------\nCódigo Ticket:{this.ID:D3}\nPrecio:{this.Precio:F2} {MostrarListaMenu()}\n" +
+            return $"------------Mostrando ticket-----------\nCódigo Ticket:{this.ID:D3}\nPrecio:{this.Precio:F2}\n\n{MostrarListaMenu()}\n" +
                    $"------------Mostrando ticket-----------";
         }
 

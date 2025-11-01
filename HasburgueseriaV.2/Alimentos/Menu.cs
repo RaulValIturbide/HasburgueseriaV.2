@@ -24,11 +24,12 @@ namespace HasburgueseriaV._2.Alimentos
         }
         public override string ToString()
         {
-            return $"Hamburguesa: {this.hamburguesa.nombre} " +
-                   $"\n\tLista Ingredientes: " +
-                   $"\n\t\t{MostrarListaIngredientes()} " +
-                   $"\nBebida: {this.bebida.nombre} " +
-                   $"\nComplemento: {this.complemento.nombre}";
+            return $"{this.nombre}" +
+                   $"\n\tHamburguesa: {this.hamburguesa.nombre} " +
+                   $"\n\t\tLista Ingredientes: " +
+                   $"\n\t\t\t{MostrarListaIngredientes()} " +
+                   $"\n\tBebida: {this.bebida.nombre} " +
+                   $"\n\tComplemento: {this.complemento.nombre}";
         }
         private string MostrarListaIngredientes()
         {

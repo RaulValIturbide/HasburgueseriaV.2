@@ -28,13 +28,17 @@ namespace HasburgueseriaV._2.Pantalla
                     }
                     else
                     {
-                        Console.WriteLine("Elija un número entre los posibles e intentelo de nuevo\n");
+                        throw new FueraRangoException("Elija un número entre los posibles e intentelo de nuevo\n");
                     }
 
                 }
                 catch (FormatException fe)
                 {
                     Console.WriteLine("Elija un número\n");
+                }
+                catch (FueraRangoException fre)
+                {
+                    Console.WriteLine(fre.Message);
                 }
                 catch (Exception ex)
                 {
@@ -83,12 +87,17 @@ namespace HasburgueseriaV._2.Pantalla
         {
             int menuElegido = -1;
             bool correcto = false;
-            try
+            int bucle = 0;
+            do
             {
-                do
+
+
+                try
                 {
-                    Console.WriteLine("¿Que menú quieres?\n1-Menu Felipe V\n2-Menu Juana la loca\n3-Menu Familiar");
+                    if (bucle > 0) { PresioneEnterParaContinuar(); LimpiarPantalla(); } //Si el usuario se equivoca le mostraremos el error y limpiaremos pantalla para que se vea más limpio
+                    Console.WriteLine("¿Que menú quieres?\n1-Menú Carlos II\n2-Menú Juana La Loca\n3-Menú Endogámico Familiar");
                     Console.Write(">>");
+                    bucle++;
                     menuElegido = Convert.ToInt32(Console.ReadLine());
                     if (EleccionUsuario(1, 3, menuElegido))
                     {
@@ -96,19 +105,25 @@ namespace HasburgueseriaV._2.Pantalla
                     }
                     else
                     {
-                        Console.WriteLine("Elige un numero entre los valores posibles");
+                        throw new FueraRangoException("Elija un numero entre 1 y 3");
                     }
-                } while (!correcto);
-            }
-            catch (FormatException fe)
-            {
-                Console.WriteLine("Elige un número");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"ERROR FATAL\n: {ex.StackTrace}");
-            }
-            return menuElegido;
+
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("Elige un número");
+                }
+                catch (FueraRangoException fre)
+                {
+                    Console.WriteLine(fre.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR FATAL\n: {ex.StackTrace}");
+                }               
+        }while(!correcto);
+
+         return menuElegido;
         }
 
         /// <summary>
