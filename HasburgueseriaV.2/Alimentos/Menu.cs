@@ -27,7 +27,7 @@ namespace HasburgueseriaV._2.Alimentos
             return $"{this.nombre}" +
                    $"\n\tHamburguesa: {this.hamburguesa.nombre} " +
                    $"\n\t\tLista Ingredientes: " +
-                   $"\n\t\t\t{MostrarListaIngredientes()} " +
+                   $"\n{MostrarListaIngredientes()} " +
                    $"\n\tBebida: {this.bebida.nombre} " +
                    $"\n\tComplemento: {this.complemento.nombre}";
         }
@@ -36,7 +36,7 @@ namespace HasburgueseriaV._2.Alimentos
             string lista = "";
             foreach (Ingrediente i in this.hamburguesa.listaIngredientes)
             {
-                lista += i.nombre + "\n\t\t";
+                lista += "\t\t\t" + i.nombre + "\n";
             }
             return lista;
         }

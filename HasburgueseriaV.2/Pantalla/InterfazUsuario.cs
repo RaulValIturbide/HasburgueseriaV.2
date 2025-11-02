@@ -10,6 +10,10 @@ namespace HasburgueseriaV._2.Pantalla
 {
     public class InterfazUsuario
     {
+        /// <summary>
+        /// Metodo de interfaz principal
+        /// </summary>
+        /// <returns>Devuelve un numero entre 1 y 4 de la eleccion del usuario</returns>
         public static int MenuPrincipal()
         {
             int usuario = -1;
@@ -90,8 +94,6 @@ namespace HasburgueseriaV._2.Pantalla
             int bucle = 0;
             do
             {
-
-
                 try
                 {
                     if (bucle > 0) { PresioneEnterParaContinuar(); LimpiarPantalla(); } //Si el usuario se equivoca le mostraremos el error y limpiaremos pantalla para que se vea más limpio

@@ -12,8 +12,7 @@ namespace HasburgueseriaV._2.Gestor
         public static List<Ingrediente> listaIngredientes = new List<Ingrediente>();
         public static List<Ingrediente> CrearIngredientesHamburguesa(int IdHamburguesa)
         {
-            
-            
+     
                 listaIngredientes = new List<Ingrediente>();
             
             switch (IdHamburguesa)

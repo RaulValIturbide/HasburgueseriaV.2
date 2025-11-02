@@ -14,6 +14,9 @@ namespace HasburgueseriaV._2.Tickets
        public static List<Ticket> ListaTicket = new List<Ticket>();
        private static string rutaArchivo = "ListaTicketBBDD.json";
 
+        /// <summary>
+        /// Metodo para inciar la lista de ticket si aun no existe
+        /// </summary>
         public static void InicializarLista()
         {
             FileInfo data = new FileInfo(rutaArchivo);
@@ -80,7 +83,11 @@ namespace HasburgueseriaV._2.Tickets
 
             return con;
         }
-        
+        /// <summary>
+        /// Si existen menus en la lista menú comprueba el precio del ticket sumando los precios de los menú
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns>Devuelve un numero decimal de la suma del precio de los menus de la lista del ticket</returns>
         public static double SumaPrecioTicket(Ticket ticket)
         {
             double total = 0;

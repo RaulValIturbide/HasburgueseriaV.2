@@ -47,10 +47,10 @@ public class Program
                     Console.WriteLine(TicketMostrado().mensajeError); //Ejecutamos la busqueda del ticket y mostramos el resultado
                     break;
                 case 3://Ver Menus
-                    switch(InterfazUsuario.ElegirLista())
+                    Menu mostrarMenu = new Menu();
+                    switch (InterfazUsuario.ElegirLista())
                     {
                         case 1: //Mostrar ingredientes
-                            Menu mostrarMenu = new Menu();
                             mostrarMenu = GestorMenu.CrearMenu(null);
                             InterfazUsuario.LimpiarPantalla();
                             if (mostrarMenu != null)
@@ -59,7 +59,11 @@ public class Program
                             }
                             break;
                         case 2://Mostrar precios
-
+                            mostrarMenu = GestorMenu.CrearMenu(null);
+                            if (mostrarMenu != null)
+                            {
+                                Console.WriteLine($"El precio del {mostrarMenu.nombre} es de {mostrarMenu.precio} euros");
+                            }
                             break;
                     }                  
                     break;
@@ -71,6 +75,10 @@ public class Program
 
     }
 
+    /// <summary>
+    /// Metodo para buscar un ticket específico al usuario de la lista de tickets
+    /// </summary>
+    /// <returns>Devuelve un Controlador que gestiona si se ha encontrado o el error que ha habido</returns>
     private static Controlador TicketMostrado()
     {
         Controlador con = new Controlador();
