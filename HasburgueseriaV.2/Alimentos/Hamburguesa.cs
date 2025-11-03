@@ -8,11 +8,11 @@ namespace HasburgueseriaV._2.Alimentos
 {
     public class Hamburguesa : Alimento
     {
-        public List<Ingrediente> listaIngredientes = new List<Ingrediente>();
+        public List<Ingrediente> listaIngredientes { get; set; } = new List<Ingrediente>();
 
-        public Hamburguesa(List<Ingrediente> listaIngrediente,double precio, string nombre) : base(precio, nombre)
+        public Hamburguesa(List<Ingrediente> listaIngredientes,double precio, string nombre) : base(precio, nombre)
         {
-            this.listaIngredientes = listaIngrediente;
+            this.listaIngredientes = listaIngredientes;
             this.precio = precio;
             this.nombre = nombre;
         }

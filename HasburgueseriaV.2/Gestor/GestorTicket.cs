@@ -11,7 +11,7 @@ namespace HasburgueseriaV._2.Tickets
 {
     public class GestorTicket
     {
-       public static List<Ticket> ListaTicket = new List<Ticket>();
+       public static List<Ticket> ListaTicket { get; set; } = new List<Ticket>();
        private static string rutaArchivo = "ListaTicketBBDD.json";
 
         /// <summary>
@@ -62,16 +62,13 @@ namespace HasburgueseriaV._2.Tickets
             {
                 FileInfo data = new FileInfo(rutaArchivo);
 
-                if (data.Exists)
+                if (!ListaTicket.Any(t => t.ID == ticket.ID)) //Verificamos que no existe el id ya
                 {
-                  string contenido = File.ReadAllText(rutaArchivo);
-                  ListaTicket = JsonSerializer.Deserialize<List<Ticket>>(contenido) ?? new List<Ticket>(); //->Deserializamos el contenido, si nos salta nulo porque está vacío pues creamos una nueva lista
+                    ListaTicket.Add(ticket);
                 }
-                  ListaTicket.Add(ticket); //Añadimos el ticket a la lista (estatica)
-                  string serializacion = JsonSerializer.Serialize(ListaTicket); //Serialización
-                    
-                File.WriteAllText(rutaArchivo, serializacion); 
-                    
+                string serializacion = JsonSerializer.Serialize(ListaTicket);
+                File.WriteAllText(rutaArchivo, serializacion);
+     
                 con.codigoError = 0; //Controlador
                 con.mensajeError = "Ticket guardado";              
             }

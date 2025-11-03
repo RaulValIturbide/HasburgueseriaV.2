@@ -8,11 +8,11 @@ namespace HasburgueseriaV._2.Alimentos
 {
     public class Menu 
     {
-        public double precio;
-        public string nombre;
-        public Hamburguesa hamburguesa;
-        public Bebida bebida;
-        public Complemento complemento;
+        public double precio { get; set; }
+        public string nombre { get; set; }
+        public Hamburguesa hamburguesa { get; set; }
+        public Bebida bebida { get; set; }
+        public Complemento complemento { get; set; }
 
         public Menu(string nombre) 
         {

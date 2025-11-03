@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace HasburgueseriaV._2.Alimentos
 {
     public class Ingrediente : Alimento
-    {
-       
+    {    
         public Ingrediente(double precio, string nombre) : base(precio, nombre)
         {
             this.precio = precio;

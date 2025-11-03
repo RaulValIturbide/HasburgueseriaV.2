@@ -78,7 +78,8 @@ namespace HasburgueseriaV._2.Pantalla
         }
         public static void LimpiarPantalla()
         {
-            Console.Clear();
+            //Console.Clear(); -> Deja información de "Tickets fantasma" ¿buffer? ¿solución?
+            Console.WriteLine(new string('\n', 50)); //-> Servirá aunque no es lo más técnico, me gustaría resolver el problema de arriba
         }
         public static void PresioneEnterParaContinuar()
         {
@@ -135,6 +136,7 @@ namespace HasburgueseriaV._2.Pantalla
         /// <returns>Si se elije que si (1) devolverá true y se pagará el pedido</returns>
         public static bool PagarPedido(Ticket ticketActual)
         {
+            LimpiarPantalla();
             bool correcto = false;
             int usuario = 2;
             do
@@ -152,6 +154,8 @@ namespace HasburgueseriaV._2.Pantalla
                 catch (FormatException fe)
                 {
                     Console.WriteLine("Elije un número");
+                    PresioneEnterParaContinuar();
+                    LimpiarPantalla();
                 }
                 catch (FueraRangoException fre)
                 {

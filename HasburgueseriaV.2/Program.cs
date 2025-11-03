@@ -14,8 +14,9 @@ public class Program
         int bucle = 0;
         do
         {
-            if (bucle > 0) { InterfazUsuario.PresioneEnterParaContinuar(); InterfazUsuario.LimpiarPantalla(); }
+            if (bucle > 0) { InterfazUsuario.PresioneEnterParaContinuar();}//Si no es la primera vez que el usuario está en el Mprincipal, limpiamos la pantalla
             bucle++;
+            InterfazUsuario.LimpiarPantalla();
             switch (InterfazUsuario.MenuPrincipal())
             {
                 case 1://Hacer Pedido                   
@@ -32,7 +33,7 @@ public class Program
                     t.Precio = GestorTicket.SumaPrecioTicket(t);
 
                     InterfazUsuario.LimpiarPantalla();
-
+                    //TODO ARREGLAR TICKETS FANTASMAS -> Problemas con ConsoleClear() -> Simulamos limpieza -> ¿profesor?
                     if (t.Precio == -1 || !InterfazUsuario.PagarPedido(t))
                     {
                         Console.WriteLine("Cancelando Ticket...");
@@ -40,6 +41,8 @@ public class Program
                     }
                     else
                     {
+                        Console.WriteLine("Cobrando Ticket...");
+
                         GestorTicket.GuardarTicket(t);
                     }
                     break;
@@ -85,7 +88,7 @@ public class Program
         Ticket ticketBuscado = null;
         int IDBuscado = 0;
 
-        if (GestorTicket.ListaTicket.Count == 0)
+        if (GestorTicket.ListaTicket.Count == 0 || GestorTicket.ListaTicket == null)
         {
             con.codigoError = 101;
             con.mensajeError = "Todavía no hay tickets en la BBDD";
@@ -93,14 +96,11 @@ public class Program
         else
         {
              IDBuscado = InterfazUsuario.MostrarTicket();
+            InterfazUsuario.LimpiarPantalla();
 
-            foreach (Ticket t in GestorTicket.ListaTicket)
-            {
-                if (t.ID == IDBuscado)
-                {
-                    ticketBuscado = t;
-                }
-            }
+            
+            ticketBuscado = GestorTicket.ListaTicket.FirstOrDefault(t => t.ID == IDBuscado);
+          
             
             if (ticketBuscado != null)
             {
@@ -109,6 +109,7 @@ public class Program
                 con.mensajeError = "\n\nGracias por su compra,¡¡Esperamos que vuelva pronto!!";
 
                 Console.WriteLine(ticketBuscado.ToString());
+                Console.WriteLine(ticketBuscado.listaMenu.Count);
             }
             else
             {

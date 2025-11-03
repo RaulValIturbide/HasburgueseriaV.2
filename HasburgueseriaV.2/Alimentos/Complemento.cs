@@ -8,8 +8,6 @@ namespace HasburgueseriaV._2.Alimentos
 {
     public class Complemento : Alimento
     {
-
-
         public Complemento(double precio, string nombre) : base(precio, nombre)
         {
             this.precio = precio;

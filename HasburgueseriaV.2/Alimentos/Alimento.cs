@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HasburgueseriaV._2.Alimentos
 {
-    public class Alimento
+    public abstract class Alimento
     {
         public double precio { get; set; }
         public string nombre { get; set; }

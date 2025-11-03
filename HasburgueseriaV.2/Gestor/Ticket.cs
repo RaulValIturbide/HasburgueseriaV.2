@@ -12,7 +12,7 @@ namespace HasburgueseriaV._2.Tickets
     {
         public int ID { get; set; }
         public double Precio { get; set; }
-        public List<Menu> listaMenu = new List<Menu>();
+        public List<Menu> listaMenu { get; set; } = new List<Menu>();
 
 
         public override string ToString()
