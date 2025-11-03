@@ -26,6 +26,7 @@ public class Program
                     {
                         InterfazUsuario.LimpiarPantalla();
                         Menu menuElegido =  GestorMenu.CrearMenu(t);
+                        InterfazUsuario.LimpiarPantalla();
                         Console.WriteLine($"\nAñadiendo {menuElegido.nombre} al ticket...\n" ); //Mostramos el menú elegido
 
                     } while (!InterfazUsuario.TerminarPedido()); //Se repetirá hasta que el usuario haya terminado de pedir menús
@@ -33,7 +34,7 @@ public class Program
                     t.Precio = GestorTicket.SumaPrecioTicket(t);
 
                     InterfazUsuario.LimpiarPantalla();
-                    //TODO ARREGLAR TICKETS FANTASMAS -> Problemas con ConsoleClear() -> Simulamos limpieza -> ¿profesor?
+                    //TODO ARREGLAR TICKETS FANTASMAS -> Problemas con ConsoleClear() -> Simulamos limpieza -> solución alternativa
                     if (t.Precio == -1 || !InterfazUsuario.PagarPedido(t))
                     {
                         Console.WriteLine("Cancelando Ticket...");
@@ -51,9 +52,11 @@ public class Program
                     break;
                 case 3://Ver Menus
                     Menu mostrarMenu = new Menu();
+                    InterfazUsuario.LimpiarPantalla();
                     switch (InterfazUsuario.ElegirLista())
                     {
                         case 1: //Mostrar ingredientes
+                            InterfazUsuario.LimpiarPantalla();
                             mostrarMenu = GestorMenu.CrearMenu(null);
                             InterfazUsuario.LimpiarPantalla();
                             if (mostrarMenu != null)
@@ -62,7 +65,9 @@ public class Program
                             }
                             break;
                         case 2://Mostrar precios
+                            InterfazUsuario.LimpiarPantalla();
                             mostrarMenu = GestorMenu.CrearMenu(null);
+                            InterfazUsuario.LimpiarPantalla();
                             if (mostrarMenu != null)
                             {
                                 Console.WriteLine($"El precio del {mostrarMenu.nombre} es de {mostrarMenu.precio} euros");
@@ -87,6 +92,7 @@ public class Program
         Controlador con = new Controlador();
         Ticket ticketBuscado = null;
         int IDBuscado = 0;
+        InterfazUsuario.LimpiarPantalla();
 
         if (GestorTicket.ListaTicket.Count == 0 || GestorTicket.ListaTicket == null)
         {
@@ -109,7 +115,6 @@ public class Program
                 con.mensajeError = "\n\nGracias por su compra,¡¡Esperamos que vuelva pronto!!";
 
                 Console.WriteLine(ticketBuscado.ToString());
-                Console.WriteLine(ticketBuscado.listaMenu.Count);
             }
             else
             {

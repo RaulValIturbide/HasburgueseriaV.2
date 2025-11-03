@@ -69,10 +69,11 @@ namespace HasburgueseriaV._2.Pantalla
             }
             catch (FormatException fe)
             {
-
+                Console.WriteLine("Elija un número\n");
             }
             catch (Exception ex)
-            { 
+            {
+                Console.WriteLine($"ERROR FATAL: {ex.StackTrace}");
             }
             return IDBuscado;
         }
